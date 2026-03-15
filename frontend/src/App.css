@@ -1,0 +1,248 @@
+/* ============================================================
+   APP.CSS — UPI FRAUD DETECTION SYSTEM
+   App-level layout only — all base styles live in index.css
+   ============================================================ */
+
+/* ── App shell ── */
+.app {
+  display        : flex;
+  flex-direction : column;
+  min-height     : 100vh;
+}
+
+/* ── Top navigation bar ── */
+.navbar {
+  position         : sticky;
+  top              : 0;
+  z-index          : 100;
+  display          : flex;
+  align-items      : center;
+  justify-content  : space-between;
+  padding          : .75rem 2rem;
+  background       : rgba(5, 10, 5, 0.92);
+  border-bottom    : 1px solid rgba(0, 255, 136, 0.12);
+  backdrop-filter  : blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.navbar-brand {
+  display     : flex;
+  align-items : center;
+  gap         : 10px;
+}
+
+.navbar-logo {
+  width        : 28px;
+  height       : 28px;
+  filter       : drop-shadow(0 0 6px rgba(0,255,136,0.7));
+  animation    : iconFloat 3s ease-in-out infinite;
+}
+
+.navbar-title {
+  font-family    : var(--font-hud);
+  font-size      : .78rem;
+  font-weight    : 700;
+  letter-spacing : 2.5px;
+  color          : var(--neon-green);
+  text-shadow    : 0 0 10px var(--neon-green-glow);
+  text-transform : uppercase;
+}
+
+.navbar-links {
+  display     : flex;
+  align-items : center;
+  gap         : 1.8rem;
+  list-style  : none;
+}
+
+.navbar-links a {
+  font-size      : .68rem;
+  letter-spacing : 2px;
+  text-transform : uppercase;
+  color          : rgba(0,255,136,0.45);
+  transition     : color .2s, text-shadow .2s;
+}
+
+.navbar-links a:hover,
+.navbar-links a.active {
+  color       : var(--neon-green);
+  text-shadow : 0 0 8px var(--neon-green-glow);
+}
+
+.navbar-links a.active::after {
+  content    : '';
+  display    : block;
+  height     : 1px;
+  background : var(--neon-green);
+  box-shadow : 0 0 6px var(--neon-green-glow);
+  margin-top : 3px;
+}
+
+/* Logout button in navbar */
+.navbar-logout {
+  font-family    : var(--font-hud);
+  font-size      : .62rem;
+  letter-spacing : 2px;
+  text-transform : uppercase;
+  padding        : .38rem .9rem;
+  border-radius  : 4px;
+  border         : 1px solid rgba(255,34,68,0.35);
+  background     : transparent;
+  color          : rgba(255,34,68,0.55);
+  cursor         : pointer;
+  transition     : all .25s;
+  /* override global button fill-sweep */
+  overflow       : visible;
+}
+.navbar-logout::before { display: none; }
+.navbar-logout:hover {
+  border-color : var(--neon-red);
+  color        : var(--neon-red);
+  box-shadow   : 0 0 12px var(--neon-red-glow);
+  background   : rgba(255,34,68,0.06);
+}
+
+/* ── Main content area ── */
+.main-content {
+  flex    : 1;
+  padding : 2rem;
+}
+
+/* ── Page transition wrapper ── */
+.page-enter {
+  animation : fadeInUp .45s ease forwards;
+}
+
+/* ── Auth pages (Login / Signup) ── */
+/* Centers the glass card vertically + horizontally */
+.auth-page {
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  min-height      : calc(100vh - 60px);
+  padding         : 2rem;
+}
+
+/* Shared glass card for Login & Signup */
+.auth-card {
+  position              : relative;
+  z-index               : 10;
+  width                 : 100%;
+  max-width             : 420px;
+  background            : rgba(8, 18, 8, 0.9);
+  border                : 1px solid rgba(0,255,136,0.2);
+  border-radius         : 14px;
+  padding               : 2.6rem 2.2rem;
+  backdrop-filter       : blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  overflow              : hidden;
+  animation             : cardEntry .6s cubic-bezier(.22,.68,0,1.2) forwards;
+}
+
+@keyframes cardEntry {
+  from { opacity: 0; transform: translateY(26px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* Rotating conic border sweep */
+.auth-card::before {
+  content       : '';
+  position      : absolute;
+  inset         : -1px;
+  border-radius : 14px;
+  background    : conic-gradient(
+    from var(--angle, 0deg),
+    transparent 60%,
+    rgba(0,255,136,0.7) 75%,
+    transparent 100%
+  );
+  -webkit-mask         : linear-gradient(#fff 0 0) content-box,
+                         linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite       : exclude;
+  animation            : rotateBorder 4s linear infinite;
+  opacity              : 0.55;
+  pointer-events       : none;
+}
+
+@property --angle {
+  syntax        : '<angle>';
+  initial-value : 0deg;
+  inherits      : false;
+}
+
+@keyframes rotateBorder {
+  to { --angle: 360deg; }
+}
+
+/* ── Fraud dashboard layout ── */
+/* (panel styles already in index.css — only overrides here) */
+.fraud-page {
+  padding-top : 0;
+}
+
+/* Panel left scrolls if content overflows on short screens */
+.panel-left {
+  max-height : calc(100vh - 120px);
+  overflow-y : auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,255,136,0.2) transparent;
+}
+
+.panel-left::-webkit-scrollbar       { width: 4px; }
+.panel-left::-webkit-scrollbar-track { background: transparent; }
+.panel-left::-webkit-scrollbar-thumb {
+  background    : rgba(0,255,136,0.2);
+  border-radius : 2px;
+}
+.panel-left::-webkit-scrollbar-thumb:hover { background: var(--neon-green); }
+
+/* Right panel sticks while left panel scrolls */
+.panel-right {
+  position : sticky;
+  top      : 80px;
+}
+
+/* ── Not found / 404 page ── */
+.not-found {
+  display         : flex;
+  flex-direction  : column;
+  align-items     : center;
+  justify-content : center;
+  min-height      : calc(100vh - 60px);
+  gap             : 1rem;
+  text-align      : center;
+}
+
+.not-found-code {
+  font-family    : var(--font-hud);
+  font-size      : 5rem;
+  font-weight    : 700;
+  color          : var(--neon-green);
+  text-shadow    : 0 0 30px var(--neon-green-glow), 0 0 60px var(--neon-green-dim);
+  line-height    : 1;
+  animation      : cyberPulse 2.5s ease-in-out infinite;
+}
+
+.not-found p {
+  font-size      : .75rem;
+  letter-spacing : 3px;
+  text-transform : uppercase;
+  color          : rgba(0,255,136,0.4);
+}
+
+/* ── Responsive overrides ── */
+@media (max-width: 768px) {
+  .navbar          { padding: .65rem 1rem; }
+  .navbar-title    { font-size: .65rem; letter-spacing: 1.5px; }
+  .navbar-links    { gap: 1rem; }
+  .main-content    { padding: 1rem; }
+  .auth-page       { padding: 1rem; }
+  .panel-left      { max-height: none; overflow-y: visible; }
+  .panel-right     { position: static; top: auto; }
+}
+
+@media (max-width: 480px) {
+  .navbar-links    { display: none; }
+  .navbar-title    { font-size: .6rem; }
+}

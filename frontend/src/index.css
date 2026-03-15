@@ -1,0 +1,637 @@
+/* ============================================================
+   INDEX.CSS — UPI FRAUD DETECTION SYSTEM
+   Cyber Security Dark Theme — Global Foundation
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;600;700&display=swap');
+
+/* ── CSS Custom Properties ── */
+:root {
+  /* Fonts */
+  --font-mono : 'Share Tech Mono', 'Courier New', monospace;
+  --font-hud  : 'Orbitron', monospace;
+
+  /* Neon palette */
+  --neon-green      : #00ff88;
+  --neon-green-dim  : rgba(0, 255, 136, 0.15);
+  --neon-green-glow : rgba(0, 255, 136, 0.45);
+  --neon-green-soft : rgba(0, 255, 136, 0.07);
+  --neon-red        : #ff2244;
+  --neon-red-dim    : rgba(255, 34, 68, 0.15);
+  --neon-red-glow   : rgba(255, 34, 68, 0.45);
+  --neon-blue       : #00cfff;
+  --neon-blue-dim   : rgba(0, 207, 255, 0.15);
+  --neon-blue-glow  : rgba(0, 207, 255, 0.4);
+  --neon-amber      : #f0c040;
+  --neon-amber-glow : rgba(240, 192, 64, 0.4);
+
+  /* Backgrounds */
+  --bg-root    : #050a05;
+  --bg-surface : #0a0f0a;
+  --bg-card    : rgba(8, 18, 8, 0.88);
+  --bg-input   : rgba(0, 255, 136, 0.04);
+  --bg-input-f : rgba(0, 255, 136, 0.07);
+
+  /* Borders */
+  --border-dim  : rgba(0, 255, 136, 0.16);
+  --border-mid  : rgba(0, 255, 136, 0.35);
+  --border-bright: rgba(0, 255, 136, 0.6);
+
+  /* Text */
+  --text-primary   : #e0ffe0;
+  --text-secondary : rgba(180, 255, 180, 0.6);
+  --text-muted     : rgba(120, 200, 120, 0.35);
+  --text-dim       : rgba(0, 255, 136, 0.3);
+
+  /* Layout */
+  --radius-card  : 14px;
+  --radius-input : 6px;
+  --radius-sm    : 4px;
+  --transition   : 0.25s ease;
+
+  /* Typography base */
+  font-family             : var(--font-mono);
+  font-size               : 16px;
+  line-height             : 1.6;
+  font-weight             : 400;
+  font-synthesis          : none;
+  text-rendering          : optimizeLegibility;
+  -webkit-font-smoothing  : antialiased;
+  -moz-osx-font-smoothing : grayscale;
+  color-scheme            : dark;
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing : border-box;
+  margin     : 0;
+  padding    : 0;
+}
+
+/* ── Body ── */
+body {
+  font-family      : var(--font-mono);
+  background-color : var(--bg-root);
+  color            : var(--text-primary);
+  min-width        : 320px;
+  min-height       : 100vh;
+  overflow-x       : hidden;
+  position         : relative;
+}
+
+/* ── Cyber grid background ── */
+body::before {
+  content    : '';
+  position   : fixed;
+  inset      : 0;
+  background-image :
+    linear-gradient(rgba(0, 255, 136, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 136, 0.028) 1px, transparent 1px);
+  background-size  : 44px 44px;
+  pointer-events   : none;
+  z-index          : 0;
+}
+
+/* ── Radial vignette ── */
+body::after {
+  content        : '';
+  position       : fixed;
+  inset          : 0;
+  background     : radial-gradient(
+    ellipse at center,
+    transparent 35%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+  pointer-events : none;
+  z-index        : 0;
+}
+
+/* ── App root ── */
+#root {
+  position   : relative;
+  z-index    : 1;
+  max-width  : 1280px;
+  margin     : 0 auto;
+  padding    : 2rem;
+  min-height : 100vh;
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family    : var(--font-hud);
+  text-transform : uppercase;
+  letter-spacing : 2px;
+  line-height    : 1.2;
+  color          : var(--neon-green);
+  text-shadow    : 0 0 12px var(--neon-green-glow);
+}
+
+h1 { font-size: 1.9rem;  font-weight: 700; }
+h2 { font-size: 1.35rem; font-weight: 700; }
+h3 { font-size: 1.1rem;  font-weight: 600; }
+h4 { font-size: .9rem;   font-weight: 600; }
+
+p {
+  font-family : var(--font-mono);
+  color       : var(--text-secondary);
+  font-size   : .875rem;
+  line-height : 1.7;
+}
+
+a {
+  font-family     : var(--font-mono);
+  font-weight     : 500;
+  color           : var(--neon-green);
+  text-decoration : none;
+  transition      : color var(--transition), text-shadow var(--transition);
+}
+
+a:hover {
+  color       : #fff;
+  text-shadow : 0 0 8px var(--neon-green-glow);
+}
+
+label, span {
+  font-family : var(--font-mono);
+  color       : var(--text-secondary);
+}
+
+/* ============================================================
+   INPUTS, SELECTS, TEXTAREAS
+   ============================================================ */
+
+input, select, textarea {
+  width            : 100%;
+  background       : var(--bg-input);
+  border           : 1px solid var(--border-dim);
+  border-radius    : var(--radius-input);
+  color            : var(--text-primary);
+  font-family      : var(--font-mono);
+  font-size        : .875rem;
+  padding          : .65rem 1rem;
+  outline          : none;
+  letter-spacing   : 1px;
+  transition       :
+    border-color var(--transition),
+    box-shadow   var(--transition),
+    background   var(--transition);
+  appearance       : none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color          : var(--text-muted);
+  letter-spacing : 1px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color : var(--neon-green);
+  background   : var(--bg-input-f);
+  box-shadow   :
+    0 0 0 3px rgba(0, 255, 136, 0.1),
+    0 0 18px rgba(0, 255, 136, 0.08);
+}
+
+/* Custom select arrow */
+select {
+  cursor           : pointer;
+  padding-right    : 2rem;
+  background-image : url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2300ff88' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat   : no-repeat;
+  background-position : right .75rem center;
+}
+
+select option {
+  background : var(--bg-surface);
+  color      : var(--text-primary);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+button, .btn {
+  font-family    : var(--font-hud);
+  font-size      : .78rem;
+  font-weight    : 700;
+  letter-spacing : 3px;
+  text-transform : uppercase;
+  padding        : .75rem 1.8rem;
+  border-radius  : var(--radius-input);
+  border         : 1px solid var(--neon-green);
+  background     : transparent;
+  color          : var(--neon-green);
+  cursor         : pointer;
+  position       : relative;
+  overflow       : hidden;
+  transition     : color var(--transition), box-shadow var(--transition);
+  display        : inline-flex;
+  align-items    : center;
+  justify-content: center;
+  gap            : .5rem;
+  white-space    : nowrap;
+}
+
+/* Fill sweep on hover */
+button::before, .btn::before {
+  content          : '';
+  position         : absolute;
+  inset            : 0;
+  background       : var(--neon-green);
+  transform        : scaleX(0);
+  transform-origin : left;
+  transition       : transform 0.32s ease;
+  z-index          : 0;
+}
+
+button:hover::before, .btn:hover::before { transform: scaleX(1); }
+
+button:hover, .btn:hover {
+  color       : #000;
+  box-shadow  : 0 0 24px var(--neon-green-glow), 0 0 48px var(--neon-green-dim);
+}
+
+button > *, .btn > * { position: relative; z-index: 1; }
+button span, .btn span { position: relative; z-index: 1; }
+
+button:active, .btn:active { transform: scale(0.97); }
+
+button:disabled, .btn:disabled {
+  opacity        : 0.5;
+  cursor         : not-allowed;
+  pointer-events : none;
+}
+
+button:focus-visible, .btn:focus-visible {
+  outline     : 2px solid var(--neon-green);
+  outline-offset: 3px;
+}
+
+/* Danger variant */
+.btn-danger {
+  border-color : var(--neon-red);
+  color        : var(--neon-red);
+}
+.btn-danger::before { background: var(--neon-red); }
+.btn-danger:hover   {
+  color      : #fff;
+  box-shadow : 0 0 24px var(--neon-red-glow);
+}
+
+/* Ghost variant */
+.btn-ghost {
+  border-color : var(--border-dim);
+  color        : var(--text-dim);
+}
+.btn-ghost::before { background: rgba(0,255,136,0.08); }
+.btn-ghost:hover   {
+  color        : var(--neon-green);
+  border-color : var(--border-mid);
+  box-shadow   : none;
+}
+
+/* ============================================================
+   GLASS CARD
+   ============================================================ */
+
+.card {
+  background    : var(--bg-card);
+  border        : 1px solid var(--border-dim);
+  border-radius : var(--radius-card);
+  padding       : 2rem;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  position      : relative;
+  overflow      : hidden;
+  transition    : border-color var(--transition), box-shadow var(--transition);
+}
+
+.card::before {
+  content    : '';
+  position   : absolute;
+  top: -60%; left: -20%;
+  width: 140%; height: 140%;
+  background : radial-gradient(
+    ellipse at 50% 0%,
+    rgba(0,255,136,0.04) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+.card:hover {
+  border-color : var(--border-mid);
+  box-shadow   : 0 0 28px var(--neon-green-dim);
+}
+
+/* ============================================================
+   SCAN LINE
+   ============================================================ */
+
+.scan-line {
+  position   : absolute;
+  left       : 0;
+  width      : 100%;
+  height     : 1.5px;
+  background : linear-gradient(90deg, transparent, rgba(0,255,136,0.55), transparent);
+  animation  : scanDown 3.5s linear infinite;
+  pointer-events: none;
+  z-index    : 2;
+}
+
+@keyframes scanDown {
+  0%   { top: 0%;   opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ============================================================
+   CORNER BRACKETS
+   ============================================================ */
+
+.corner {
+  position     : absolute;
+  width        : 14px;
+  height       : 14px;
+  border-color : var(--neon-green);
+  border-style : solid;
+  opacity      : 0.55;
+  transition   : opacity var(--transition);
+  pointer-events: none;
+}
+.card:hover .corner,
+.login-card:hover .corner,
+.signup-card:hover .corner { opacity: 1; }
+
+.c-tl { top: 8px;    left: 8px;   border-width: 1.5px 0 0 1.5px; }
+.c-tr { top: 8px;    right: 8px;  border-width: 1.5px 1.5px 0 0; }
+.c-bl { bottom: 8px; left: 8px;   border-width: 0 0 1.5px 1.5px; }
+.c-br { bottom: 8px; right: 8px;  border-width: 0 1.5px 1.5px 0; }
+
+/* ============================================================
+   FORM HELPERS
+   ============================================================ */
+
+.form-group {
+  display        : flex;
+  flex-direction : column;
+  gap            : .4rem;
+  animation      : fadeInUp .45s ease forwards;
+  opacity        : 0;
+}
+
+.field-label {
+  font-size      : .63rem;
+  letter-spacing : 2.5px;
+  text-transform : uppercase;
+  color          : rgba(0,255,136,0.5);
+  display        : flex;
+  align-items    : center;
+  gap            : 4px;
+}
+
+.field-icon {
+  font-size : 12px;
+  opacity   : .75;
+}
+
+.input-wrap { position: relative; }
+
+.input-icon {
+  position   : absolute;
+  left       : .78rem;
+  top        : 50%;
+  transform  : translateY(-50%);
+  color      : rgba(0,255,136,0.35);
+  font-size  : 13px;
+  pointer-events: none;
+  z-index    : 1;
+  transition : color var(--transition);
+}
+
+.input-wrap:focus-within .input-icon { color: rgba(0,255,136,0.85); }
+
+.cyber-input { padding-left: 2.4rem !important; }
+
+.cyber-error {
+  color       : var(--neon-red);
+  font-size   : .7rem;
+  letter-spacing: 1.5px;
+  text-shadow : 0 0 6px var(--neon-red-glow);
+  text-align  : center;
+  animation   : fadeInUp .3s ease;
+  margin      : .4rem 0;
+}
+
+/* Password toggle */
+.pw-toggle {
+  position       : absolute;
+  right          : .78rem;
+  top            : 50%;
+  transform      : translateY(-50%);
+  background     : none;
+  border         : none;
+  color          : rgba(0,255,136,0.3);
+  cursor         : pointer;
+  font-size      : 13px;
+  padding        : 0;
+  width          : auto;
+  letter-spacing : 0;
+  transition     : color var(--transition), opacity var(--transition);
+}
+.pw-toggle:hover          { color: var(--neon-green); }
+.pw-toggle::before        { display: none; }
+.pw-toggle:hover::before  { display: none; }
+
+/* ============================================================
+   STATUS BAR
+   ============================================================ */
+
+.status-bar {
+  display       : flex;
+  align-items   : center;
+  gap           : 8px;
+  padding       : .45rem .85rem;
+  background    : rgba(0,255,136,0.03);
+  border        : 1px solid rgba(0,255,136,0.1);
+  border-radius : 5px;
+  margin-bottom : 1.5rem;
+}
+
+.status-dot {
+  width         : 7px;
+  height        : 7px;
+  border-radius : 50%;
+  background    : var(--neon-green);
+  box-shadow    : 0 0 6px var(--neon-green);
+  flex-shrink   : 0;
+  animation     : dotBlink 1.8s ease-in-out infinite;
+}
+
+@keyframes dotBlink {
+  0%, 100% { opacity: 1;    }
+  50%      { opacity: 0.2;  }
+}
+
+.status-text {
+  font-size      : .62rem;
+  letter-spacing : 2px;
+  color          : rgba(0,255,136,0.4);
+  text-transform : uppercase;
+}
+
+/* ============================================================
+   PROGRESS BAR
+   ============================================================ */
+
+.progress-bar {
+  width         : 100%;
+  height        : 2px;
+  background    : rgba(0,255,136,0.08);
+  border-radius : 1px;
+  overflow      : hidden;
+  margin-top    : .75rem;
+}
+
+.progress-fill {
+  height     : 100%;
+  background : linear-gradient(90deg, transparent, var(--neon-green), transparent);
+  animation  : progressSweep 1.2s linear infinite;
+}
+
+@keyframes progressSweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%);  }
+}
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+
+.cyber-divider, hr {
+  border     : none;
+  height     : 1px;
+  background : linear-gradient(
+    90deg, transparent,
+    rgba(0,255,136,0.22) 30%,
+    rgba(0,255,136,0.22) 70%,
+    transparent
+  );
+  margin: 1.4rem 0;
+}
+
+.divider {
+  display     : flex;
+  align-items : center;
+  gap         : 10px;
+  margin      : 1.4rem 0 1rem;
+}
+
+.divider-line {
+  flex       : 1;
+  height     : 1px;
+  background : linear-gradient(90deg, transparent, var(--border-dim), transparent);
+}
+
+.divider-text {
+  font-size      : .62rem;
+  letter-spacing : 2px;
+  color          : var(--text-dim);
+  text-transform : uppercase;
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+
+/* Neon text colors */
+.text-neon  { color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green-glow); }
+.text-red   { color: var(--neon-red);   text-shadow: 0 0 8px var(--neon-red-glow);   }
+.text-blue  { color: var(--neon-blue);  text-shadow: 0 0 8px var(--neon-blue-glow);  }
+.text-amber { color: var(--neon-amber); text-shadow: 0 0 8px var(--neon-amber-glow); }
+.text-muted { color: var(--text-muted); text-shadow: none; }
+
+/* Glow pulse — use on primary CTA buttons */
+.pulse {
+  animation: cyberPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes cyberPulse {
+  0%, 100% { box-shadow: 0 0 8px  var(--neon-green-dim);  }
+  50%      { box-shadow: 0 0 26px var(--neon-green-glow), 0 0 52px var(--neon-green-dim); }
+}
+
+/* Fade-in-up entrance */
+.fade-in {
+  animation: fadeInUp 0.55s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* Icon float */
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0);   }
+  50%      { transform: translateY(-6px);}
+}
+
+/* Cyber page wrapper */
+.cyber-page {
+  min-height      : 100vh;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  padding         : 2rem;
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-root); }
+::-webkit-scrollbar-thumb {
+  background    : var(--border-dim);
+  border-radius : 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--neon-green); }
+
+/* ============================================================
+   TEXT SELECTION
+   ============================================================ */
+
+::selection {
+  background : rgba(0, 255, 136, 0.2);
+  color      : var(--neon-green);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  #root  { padding: 1rem; }
+  h1     { font-size: 1.4rem; }
+  h2     { font-size: 1.1rem; }
+  button { padding: .65rem 1.2rem; letter-spacing: 2px; }
+}
+
+@media (max-width: 480px) {
+  #root { padding: .75rem; }
+}
